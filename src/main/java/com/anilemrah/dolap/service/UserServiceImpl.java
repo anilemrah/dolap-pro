@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.anilemrah.dolap.dao.UserDAO;
 import com.anilemrah.dolap.dto.UserDto;
 import com.anilemrah.dolap.entity.DolapUser;
-import com.anilemrah.dolap.model.UserLoginRequest;
+import com.anilemrah.dolap.exceptions.user.DolapUserException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,11 +28,14 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	/**
+	 * Users can regiter with that method
+	 */
 	@Override
-	public UserDto registerUser(UserDto userDto) {
+	public UserDto registerUser(UserDto userDto) throws DolapUserException {
 
 		if (userDAO.getUser(userDto.getEmail()) != null) {
-			throw new RuntimeException("Email is already in use!");
+			throw new DolapUserException("Email is already in use!");
 		}
 
 		DolapUser user = new DolapUser();

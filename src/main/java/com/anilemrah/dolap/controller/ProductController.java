@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anilemrah.dolap.entity.Product;
+import com.anilemrah.dolap.exceptions.product.DolapProductException;
 import com.anilemrah.dolap.service.ProductService;
 
 /**
@@ -46,12 +47,18 @@ public class ProductController {
 	 * product there for the given type, method will return empty array
 	 * 
 	 * @param productType
-	 * @return List of products, if none empty array.
+	 * @return List of products, if none 404 NOT FOUND
 	 */
 	@GetMapping(path = "/type/{productType}")
 	public ResponseEntity<Collection<Product>> getProductByProductType(@PathVariable String productType) {
-
-		return new ResponseEntity<>(productService.getProductByProductType(productType), HttpStatus.OK);
+		try {
+			// Get the product with given product type
+			return new ResponseEntity<>(productService.getProductByProductType(productType), HttpStatus.OK);
+		} catch (DolapProductException e) {
+			// Product not found
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	/**
@@ -75,13 +82,15 @@ public class ProductController {
 	@GetMapping(path = "/{productId}")
 	public ResponseEntity<Product> getProduct(@PathVariable String productId) {
 
-		Product selectedProduct = productService.getProduct(productId);
-		if (selectedProduct == null) {
-			// There is no product with given ID
+		try {
+			// Get the dolap product with given ID
+			Product selectedProduct = productService.getProduct(productId);
+			return new ResponseEntity<>(selectedProduct, HttpStatus.OK);
+		} catch (DolapProductException e) {
+			// Dolap product not found
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		// Product found, return with 200OK
-		return new ResponseEntity<>(productService.getProduct(productId), HttpStatus.OK);
 	}
 
 	/**
