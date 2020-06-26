@@ -47,7 +47,7 @@ public class ProductTypeController {
 	 * @param productType
 	 * @return Saved productType
 	 */
-	@PostMapping
+	@PostMapping(path = "/save")
 	public ResponseEntity<ProductType> saveProductType(@RequestBody ProductType productType) {
 
 		return new ResponseEntity<>(productTypeService.saveProductType(productType), HttpStatus.OK);
@@ -77,7 +77,7 @@ public class ProductTypeController {
 	 * @param productType
 	 * @return Updated product type
 	 */
-	@PutMapping(path = "/{productTypeId}")
+	@PutMapping(path = "/update")
 	public ResponseEntity<ProductType> updateProductType(@RequestBody ProductType productType) {
 
 		return new ResponseEntity<>(productTypeService.updateProductType(productType), HttpStatus.OK);

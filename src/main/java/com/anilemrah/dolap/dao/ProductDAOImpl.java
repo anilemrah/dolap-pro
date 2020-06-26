@@ -57,13 +57,13 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public void deleteProduct(String productId) {
-		dynamoDBMapper.delete(productId);
+	public void deleteProduct(Product product) {
+		dynamoDBMapper.delete(product);
 	}
 
 	@Override
-	public Product updateProduct(Product theProduct) {
-		dynamoDBMapper.save(theProduct);
-		return theProduct;
+	public Product updateProduct(Product product) {
+		dynamoDBMapper.save(product);
+		return product;
 	}
 }

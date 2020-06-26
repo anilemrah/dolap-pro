@@ -14,7 +14,7 @@ public interface ProductDAO {
 
 	public Product getProduct(String theId);
 
-	public void deleteProduct(String theId);
+	public void deleteProduct(Product theProduct);
 
 	List<Product> getByProductType(String productType);
 }

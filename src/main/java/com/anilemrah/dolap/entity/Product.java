@@ -49,9 +49,29 @@ public class Product {
 		this.productType = productType;
 	}
 
+	public Product(String productId, String productName, String price, String productType) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.price = price;
+		this.productType = productType;
+	}
+
+	/**
+	 * Constructor for DynamoDB queries, builder pattern maybe used in the future
+	 * 
+	 * @param productId
+	 */
+	public Product(String productId) {
+		this.productId = productId;
+	}
+
+	public Product() {
+	}
+
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", price=" + price + ", productType="
-				+ productType + "]";
+		return "Product [productId=" + productId + ", productName=" + productName + ", price=" + price
+				+ ", productType=" + productType + "]";
 	}
 }

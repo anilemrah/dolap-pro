@@ -41,8 +41,8 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
 	}
 
 	@Override
-	public void deleteProductType(String productTypeId) {
-		dynamoDBMapper.delete(productTypeId);
+	public void deleteProductType(ProductType productType) {
+		dynamoDBMapper.delete(productType);
 	}
 
 	@Override

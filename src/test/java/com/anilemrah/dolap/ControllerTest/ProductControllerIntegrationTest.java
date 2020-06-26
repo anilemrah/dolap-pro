@@ -20,6 +20,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.anilemrah.dolap.entity.Product;
 
+/**
+ * Product Integrations Tests
+ * @author eanil
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 public class ProductControllerIntegrationTest {
@@ -33,57 +38,46 @@ public class ProductControllerIntegrationTest {
 
 	@BeforeClass
 	public static void runBeforeAllTestMethods() throws JSONException {
-//		saveProductUrl = "http://localhost:8080/product/save";
-//
-//		headers = new HttpHeaders();
-//		headers.setContentType(MediaType.APPLICATION_JSON);
-//		productJsonObject = new JSONObject();
-//		productJsonObject.put("price", "9999");
-//		productJsonObject.put("productName", "Test");
-//		productJsonObject.put("productType", "Test");
+		saveProductUrl = "http://localhost:8090/product/save";
+
+		headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		productJsonObject = new JSONObject();
+		productJsonObject.put("price", "9999");
+		productJsonObject.put("productName", "Test");
+		productJsonObject.put("productType", "Test");
 	}
 
+	/**
+	 * This test method tests the entire CRUD functionality of the Product class
+	 * 
+	 * @throws JSONException
+	 */
 	@Test
 	public void CreateProduct_ReadProduct_IntegrationTest() throws JSONException {
-//		HttpEntity<String> request = new HttpEntity<String>(productJsonObject.toString(), headers);
-//		System.out.println("productJsonObject: " + productJsonObject.toString());
-//		System.out.println("saveProductUrl: " + saveProductUrl.toString());
-//		ResponseEntity<Product> responseProduct = restTemplate.postForEntity(saveProductUrl, request, Product.class);
-//		System.out.println("postedProduct: " + responseProduct.toString());
-//		assertNotNull(responseProduct.getBody());
-//		assertNotNull(responseProduct.getBody().getProductName());
-//		String testProductId = responseProduct.getBody().getProductId();
-//		System.out.println("Product ID: " + testProductId);
-//		String response = this.restTemplate.getForObject("/product/all", String.class);
-//		JSONAssert.assertEquals("[{price:'9999'}]", response, false);
-		
-//		restTemplate.delete("http://localhost:8080/product/" + testProductId);
-//
-//		String response3 = this.restTemplate.getForObject("/product/all", String.class);
-//		JSONAssert.assertEquals("[{}]", response3, false);
-	}
 
-//	@Test
-//	public void getObject() throws JSONException {
-//		String response = this.restTemplate.getForObject("/product/all", String.class);
-//		JSONAssert.assertEquals("[{price:'9999'}]", response, false);
-//	}
-//
-//	@Test
-//	public void updateObject() throws JSONException {
-//		productJsonObject.put("price", "8888");
-//		HttpEntity<String> request = new HttpEntity<String>(productJsonObject.toString(), headers);
-//		restTemplate.put("http://localhost:8080/product/" + testProductId, request);
-//
-//		String response = this.restTemplate.getForObject("/product/all", String.class);
-//		JSONAssert.assertEquals("[{price:'8888'}]", response, false);
-//	}
-//
-//	@Test
-//	public void deleteObject() throws JSONException {
-//		restTemplate.delete("http://localhost:8080/product/" + testProductId);
-//
-//		String response = this.restTemplate.getForObject("/product/all", String.class);
-//		JSONAssert.assertEquals("[]", response, false);
-//	}
+		// CREATE
+		HttpEntity<String> requestCreate = new HttpEntity<String>(productJsonObject.toString(), headers);
+		ResponseEntity<Product> responseCreate = restTemplate.postForEntity(saveProductUrl, requestCreate,
+				Product.class);
+		assertNotNull(responseCreate.getBody());
+		assertNotNull(responseCreate.getBody().getProductName());
+		String testProductId = responseCreate.getBody().getProductId();
+		// GET
+		String responseGetAll = this.restTemplate.getForObject("/product/" + testProductId, String.class);
+		JSONAssert.assertEquals("{price:'9999'}", responseGetAll, false);
+		// UPDATE
+		productJsonObject.put("price", "8888");
+		productJsonObject.put("productId", testProductId);
+		HttpEntity<String> requestUpdate = new HttpEntity<String>(productJsonObject.toString(), headers);
+		restTemplate.put("http://localhost:8090/product/update", requestUpdate);
+		// GET
+		String responseGetAll2 = this.restTemplate.getForObject("/product/" + testProductId, String.class);
+		JSONAssert.assertEquals("{price:'8888'}", responseGetAll2, false);
+		// DELETE
+		restTemplate.delete("http://localhost:8090/product/" + testProductId);
+		// GET
+		String responseGetAll3 = this.restTemplate.getForObject("/product/" + testProductId, String.class);
+		JSONAssert.assertEquals(null, responseGetAll3, false);
+	}
 }

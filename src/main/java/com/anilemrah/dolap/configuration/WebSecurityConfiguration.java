@@ -1,6 +1,5 @@
 package com.anilemrah.dolap.configuration;
 
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,8 +14,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private final UserService userService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public WebSecurityConfiguration(UserService userService,
-			BCryptPasswordEncoder bCryptPasswordEncoder) {
+	public WebSecurityConfiguration(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
 		super();
 		this.userService = userService;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -24,7 +22,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/user/*").permitAll().anyRequest()
+		http.csrf().disable().authorizeRequests().antMatchers("/*/*").permitAll().anyRequest()
 				.authenticated();
 	}
 

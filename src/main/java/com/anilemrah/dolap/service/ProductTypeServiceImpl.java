@@ -39,6 +39,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 
 	@Override
 	public void deleteProductType(String productTypeId) {
-		productTypeDAO.deleteProductType(productTypeId);
+		ProductType productTypeToDelete = new ProductType(productTypeId);
+		productTypeDAO.deleteProductType(productTypeToDelete);
 	}
 }

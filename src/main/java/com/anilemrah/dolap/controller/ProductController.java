@@ -99,7 +99,7 @@ public class ProductController {
 	 * @param product
 	 * @return Updated product
 	 */
-	@PutMapping(path = "update/{productId}")
+	@PutMapping(path = "update")
 	public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
 
 		return new ResponseEntity<>(productService.updateProduct(product), HttpStatus.OK);

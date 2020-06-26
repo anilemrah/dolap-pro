@@ -14,5 +14,5 @@ public interface ProductTypeDAO {
 
 	public ProductType getProductType(String theproductTypeId);
 
-	public void deleteProductType(String theproductTypeId);
+	public void deleteProductType(ProductType theProductType);
 }
