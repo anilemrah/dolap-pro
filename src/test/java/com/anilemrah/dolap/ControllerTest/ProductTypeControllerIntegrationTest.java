@@ -23,7 +23,7 @@ import com.anilemrah.dolap.entity.ProductType;
 /**
  * Product Type Integrations Tests
  * 
- * @author eanil
+ * @author Anil Emrah
  *
  */
 @RunWith(SpringRunner.class)

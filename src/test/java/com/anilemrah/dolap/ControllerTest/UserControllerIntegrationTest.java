@@ -3,6 +3,8 @@ package com.anilemrah.dolap.ControllerTest;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Random;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
@@ -24,7 +26,7 @@ import com.anilemrah.dolap.model.UserResponse;
 /**
  * User Integrations Tests
  * 
- * @author eanil
+ * @author Anil Emrah
  *
  */
 @RunWith(SpringRunner.class)
@@ -33,6 +35,7 @@ public class UserControllerIntegrationTest {
 
 	static String registerUserUrl;
 	static String loginUserUrl;
+	static String testUserEmailRegistered;
 	static JSONObject userRegisterJsonObject;
 	static JSONObject userLoginJsonObject;
 	static HttpHeaders headers;
@@ -45,21 +48,27 @@ public class UserControllerIntegrationTest {
 		registerUserUrl = "http://localhost:8090/user/register";
 		loginUserUrl = "http://localhost:8090/user/login";
 
+		Random rand = new Random();
+
+		int userNumber = rand.nextInt(5000);
+		testUserEmailRegistered = "test" + userNumber + "@user.com";
+
 		headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		userRegisterJsonObject = new JSONObject();
-		userRegisterJsonObject.put("email", "test@user.com");
+		userRegisterJsonObject.put("email", testUserEmailRegistered);
 		userRegisterJsonObject.put("firstName", "Test");
 		userRegisterJsonObject.put("lastName", "User");
 		userRegisterJsonObject.put("password", "testUserPassword");
 		// Login request
 		userLoginJsonObject = new JSONObject();
-		userLoginJsonObject.put("email", "test@user.com");
+		userLoginJsonObject.put("email", testUserEmailRegistered);
 		userLoginJsonObject.put("password", "testUserPassword");
 	}
 
 	/**
-	 * This test method tests the entire Register and Login functionality of the User class
+	 * This test method tests the entire Register and Login functionality of the
+	 * User class
 	 * 
 	 * @throws JSONException
 	 */
@@ -70,11 +79,10 @@ public class UserControllerIntegrationTest {
 		HttpEntity<String> requestRegister = new HttpEntity<String>(userRegisterJsonObject.toString(), headers);
 		ResponseEntity<UserResponse> responseRegister = restTemplate.postForEntity(registerUserUrl, requestRegister,
 				UserResponse.class);
-		System.out.println("responseRegister:" + responseRegister);
 		assertNotNull(responseRegister.getBody());
 		assertNotNull(responseRegister.getBody().getEmail());
 		String testUserEmail = responseRegister.getBody().getEmail();
-		assertEquals(testUserEmail, "test@user.com");
+		assertEquals(testUserEmail, testUserEmailRegistered);
 		// CONFLICT
 		HttpEntity<String> requestRegisterConflict = new HttpEntity<String>(userRegisterJsonObject.toString(), headers);
 		ResponseEntity<UserResponse> responseRegisterConflict = restTemplate.postForEntity(registerUserUrl,
