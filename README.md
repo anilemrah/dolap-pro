@@ -4,10 +4,10 @@
 
 ## Repo
 
-- This includes Spring Boot Application named Dolap Pro, which is here to demonstrate e-commerce application backend
-- Users can register and login, and CRUD functionalities for products and product types.
-
-> Will be updated Soon.
+- This repo includes Spring Boot Application named Dolap Pro, which is here to demonstrate e-commerce application backend.
+- Users can register and login also CRUD functionalities for products and product types.
+- Database is AWS DynamoDB.
+- Applicaton is running on AWS EC2 instance.
 
 ## Capabilities
 
@@ -22,11 +22,6 @@
 - Read Product Type
 - Update Product Type
 - Delete Product Type
-
-
-## Installation
-
-> Will be updated Soon.
 
 ### Clone
 
