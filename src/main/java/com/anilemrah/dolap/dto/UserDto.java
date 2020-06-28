@@ -2,6 +2,11 @@ package com.anilemrah.dolap.dto;
 
 import java.io.Serializable;
 
+/**
+ * User object need DTO to transfer user data.
+ * @author Anil Emrah
+ *
+ */
 public class UserDto implements Serializable {
 	private static final long serialVersionUID = 5075786835454429229L;
 	private String email;

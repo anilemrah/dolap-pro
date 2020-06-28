@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean loginUser(String rawPassword, String encryptedPassword) {
+	public boolean isPasswordCorrect(String rawPassword, String encryptedPassword) {
 
 		return bCryptPasswordEncoder.matches(rawPassword, encryptedPassword);
 	}

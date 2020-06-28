@@ -14,7 +14,7 @@ import com.anilemrah.dolap.entity.Product;
 
 /**
  * 
- * @author eanil
+ * @author Anil Emrah
  *
  */
 @Component

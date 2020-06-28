@@ -8,5 +8,5 @@ public interface UserService extends UserDetailsService {
 
 	UserDto registerUser(UserDto userDto);
 
-	boolean loginUser(String rawPassword, String encryptedPassword);
+	boolean isPasswordCorrect(String rawPassword, String encryptedPassword);
 }

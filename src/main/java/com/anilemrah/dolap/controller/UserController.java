@@ -77,7 +77,7 @@ public class UserController {
 			// Get the user from DB
 			UserDetails user = userService.loadUserByUsername(userLoginRequest.getEmail());
 			// If user found let's check is password correct
-			if (userService.loginUser(userLoginRequest.getPassword(), user.getPassword())) {
+			if (userService.isPasswordCorrect(userLoginRequest.getPassword(), user.getPassword())) {
 				// Password is correct, let user GO
 				return new ResponseEntity<>(HttpStatus.OK);
 			}

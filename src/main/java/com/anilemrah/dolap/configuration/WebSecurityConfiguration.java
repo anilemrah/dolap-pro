@@ -8,6 +8,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.anilemrah.dolap.service.UserService;
 
+/**
+ * This part need to be improved to make this application more secure, but for
+ * now it will stays like this
+ * 
+ * @author Anil Emrah
+ *
+ */
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -22,8 +29,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/*/*").permitAll().anyRequest()
-				.authenticated();
+		http.csrf().disable().authorizeRequests().antMatchers("/*/*").permitAll().anyRequest().authenticated();
 	}
 
 	@Override

@@ -6,7 +6,5 @@ public interface UserDAO {
 
 	public DolapUser registerUser(DolapUser user);
 
-	public boolean loginUser(DolapUser user);
-
 	DolapUser getUser(String userEmail);
 }

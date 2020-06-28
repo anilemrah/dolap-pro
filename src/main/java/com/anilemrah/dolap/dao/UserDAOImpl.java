@@ -8,7 +8,7 @@ import com.anilemrah.dolap.entity.DolapUser;
 
 /**
  * 
- * @author eanil
+ * @author Anil Emrah
  *
  */
 @Component
@@ -30,22 +30,5 @@ public class UserDAOImpl implements UserDAO {
 	public DolapUser registerUser(DolapUser user) {
 		dynamoDBMapper.save(user);
 		return user;
-	}
-
-	@Override
-	public boolean loginUser(DolapUser user) {
-//
-//		User userToLogin = dynamoDBMapper.load(User.class, user.getUserName());
-//
-//		if (userToLogin == null) {
-//			// User not found
-//			return false;
-//		}
-//		if (user.getUserPassword().equals(userToLogin.getUserPassword())) {
-//			// User credentials are correct. Login successful
-//			return true;
-//		}
-//		// Wrong credentials. Login failed
-		return false;
 	}
 }
