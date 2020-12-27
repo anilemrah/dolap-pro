@@ -1,4 +1,4 @@
-# Dolap Pro
+# E-Commerce CRUD Example
 
 ![SpringBoot](https://medium-story-about-s3.s3.eu-central-1.amazonaws.com/dolapImage.png)
 
